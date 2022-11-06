@@ -1,5 +1,6 @@
-import { StyledPanell } from "./Panell.styles";
+import { StyledPanell } from "./Panell.styled";
 import { useState, useEffect } from "react";
+import CustomButton from "../CustomButton/CustomButton";
 
 function Panell(props) {
 
@@ -19,14 +20,16 @@ function Panell(props) {
 
     return (
         <StyledPanell>
-            <p>
-                Número de págines
-                <input type="number" name="pages" min="0" value={webValue !== 0 ? pages : 0} onChange={handleInputChange} />
-            </p>
-            <p>
+            <div>
+                Número de pàgines
+                {/* <input type="number" name="pages" min="0" value={webValue !== 0 ? pages : 0} onChange={handleInputChange} /> */}
+                <CustomButton name="pages" onchange={handleInputChange} stateProps={[pages, setPages]} />
+            </div>
+            <div>
                 Número d'idiomes
-                <input type="number" name="lang" min="0" value={webValue !== 0 ? langs : 0} onChange={handleInputChange} />
-            </p>
+                {/* <input type="number" name="langs" min="0" value={webValue !== 0 ? langs : 0} onChange={handleInputChange} /> */}
+                <CustomButton name="langs" onchange={handleInputChange} stateProps={[langs, setLangs]} />
+            </div>
         </StyledPanell>
     );
 }
