@@ -7,11 +7,12 @@ function Panell(props) {
     const [pages, setPages] = useState(0);
     const [langs, setLangs] = useState(0);
     const [setExtra] = props.stateProps;
-    const webValue = props.webValue;
+    // const webValue = props.webValue;
 
     const handleInputChange = event => {
-        const { name, value } = event.target;
-        name === "pages" ? setPages(Number(value)) : setLangs(Number(value));
+        const name = event.target.name;
+        const value = Number.isInteger(Number(event.target.value)) ? Number(event.target.value) : 0;
+        name === "pages" ? setPages(value) : setLangs(value);
     }
 
     useEffect(() => {
