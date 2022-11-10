@@ -1,0 +1,21 @@
+#list {
+    border-collapse: collapse;
+    width: max-content;
+}
+
+#list td, th {
+    border: 1px solid lightgrey;
+    padding: .5rem;
+}
+
+#list tr:hover {
+    background-color: lightgrey;
+}
+
+#list th {
+    padding-top: .9rem;
+    padding-bottom: .9rem;
+    text-align: left;
+    background-color: grey;
+    color: white;
+}
