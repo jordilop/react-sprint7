@@ -19,3 +19,7 @@
     background-color: grey;
     color: white;
 }
+
+button {
+    margin-right: .5rem;
+}

@@ -13,7 +13,6 @@ function Quotation() {
     const [extra, setExtra] = useLocalStorage("Extra", 0);
     const [quotation, setQuotation] = useLocalStorage("Total", 0);
     const [quotationList, setQuotationList] = useState([]);
-    const date = new Date();
 
     const getServicesName = (web, seo, ads) => {
         const result = [];
@@ -27,7 +26,7 @@ function Quotation() {
         setQuotationList(prevElements => [
             ...prevElements,
             {
-                date: date.toLocaleDateString(),
+                date: new Date().toLocaleString(),
                 name: document.getElementById("name").value,
                 customer: document.getElementById("customer").value,
                 services: getServicesName(web, seo, ads).toString(),
