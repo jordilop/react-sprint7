@@ -2,12 +2,15 @@ import { StyledPanell } from "./Panell.styled";
 import { useEffect } from "react";
 import CustomButton from "../CustomButton/CustomButton";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
+import Popup from "../Popup/Popup";
 
 function Panell(props) {
 
     const [pages, setPages] = useLocalStorage("Pages", 0);
     const [langs, setLangs] = useLocalStorage("Langs", 0);
     const [setExtra] = props.stateProps;
+    const textPages = "Servei per triar el nombre de págines de la seva pàgina Web";
+    const textLangs = "Servei per triar el nombre d'idiomes de la seva pàgina Web";
 
     const handleInputChange = event => {
         const name = event.target.name;
@@ -24,10 +27,12 @@ function Panell(props) {
             <div>
                 Número de pàgines
                 <CustomButton name="pages" onchange={handleInputChange} stateProps={[pages, setPages]} />
+                <Popup text={textPages} value={pages} />
             </div>
             <div>
                 Número d'idiomes
                 <CustomButton name="langs" onchange={handleInputChange} stateProps={[langs, setLangs]} />
+                <Popup text={textLangs} value={langs} />
             </div>
         </StyledPanell>
     );
