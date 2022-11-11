@@ -5,11 +5,11 @@ import { useLocalStorage } from "../../hooks/useLocalStorage";
 
 function QuotationList({ list }) {
 
-    const [newList, setNewList] = useLocalStorage("QuotationList", []);
+    const [newList, setNewList] = useLocalStorage("QuotationList", list);
 
     const searchByName = (e) => {
         if (e.target.value.length > 0) {
-            const result = list.filter(element => element.name.includes(e.target.value));
+            const result = list.filter(element => element.name.toLowerCase().includes(e.target.value.toLowerCase()));
             setNewList(result);
         } else {
             setNewList(list);
@@ -17,12 +17,12 @@ function QuotationList({ list }) {
     }
 
     const orderByName = () => {
-        const result = [...list].sort((a, b) => (a.name.toLowerCase() < b.name.toLowerCase() ? -1 : (a.name.toLowerCase() > b.name.toLowerCase() ? 1 : 0)));
+        const result = [...newList].sort((a, b) => (a.name.toLowerCase() < b.name.toLowerCase() ? -1 : (a.name.toLowerCase() > b.name.toLowerCase() ? 1 : 0)));
         setNewList(result);
     }
 
     const orderByDate = () => {
-        const result = [...list].sort((a, b) => a.date - b.date);
+        const result = [...newList].sort((a, b) => Date.parse(a.date) - Date.parse(b.date));
         setNewList(result);
     }
 
@@ -30,7 +30,7 @@ function QuotationList({ list }) {
 
     useEffect(() => {
         setNewList(list);
-    }, [list, setNewList]);
+    }, [list]);
 
     return (
         <div>
