@@ -3,22 +3,31 @@ import "./styles.css";
 
 function QuotationList({ list }) {
 
-    const [orderList, setOrderList] = useState([]);
+    const [newList, setNewList] = useState([]);
+
+    const searchByName = (e) => {
+        if (e.target.value.length > 0) {
+            const result = list.filter(element => element.name.includes(e.target.value));
+            setNewList(result);
+        } else {
+            setNewList(list);
+        }
+    }
 
     const orderByName = () => {
         const result = [...list].sort((a, b) => (a.name.toLowerCase() < b.name.toLowerCase() ? -1 : (a.name.toLowerCase() > b.name.toLowerCase() ? 1 : 0)));
-        setOrderList(result);
+        setNewList(result);
     }
 
     const orderByDate = () => {
         const result = [...list].sort((a, b) => a.date - b.date);
-        setOrderList(result);
+        setNewList(result);
     }
 
-    const resetOrder = () => setOrderList(list);
+    const resetOrder = () => setNewList(list);
 
     useEffect(() => {
-        setOrderList(list)
+        setNewList(list);
     }, [list]);
 
     return (
@@ -26,6 +35,9 @@ function QuotationList({ list }) {
             <button onClick={orderByName}>Ordenar alfabèticament</button>
             <button onClick={orderByDate}>Ordenar per data</button>
             <button onClick={resetOrder}>Reset ordre</button>
+            <p>
+                <input type="text" name="name" placeholder="Cerca nom pressupost" onChange={searchByName} />
+            </p>
             <h3>Llistat de pressupostos</h3>
             <table id="list">
                 <thead>
@@ -39,7 +51,7 @@ function QuotationList({ list }) {
                 </thead >
                 <tbody>
                     {
-                        orderList.map((element, index) => {
+                        newList.map((element, index) => {
                             return (
                                 <tr key={index}>
                                     <td>{element.date}</td>
