@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 import Panell from "../Panell/Panell";
@@ -12,7 +12,7 @@ function Quotation() {
     const [ads, setAds] = useLocalStorage("Ads", 0);
     const [extra, setExtra] = useLocalStorage("Extra", 0);
     const [quotation, setQuotation] = useLocalStorage("Total", 0);
-    const [quotationList, setQuotationList] = useState([]);
+    const [quotationList, setQuotationList] = useLocalStorage("QuotationList", []);
 
     const getServicesName = (web, seo, ads) => {
         const result = [];

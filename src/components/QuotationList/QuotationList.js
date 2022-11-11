@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import "./styles.css";
+import { useLocalStorage } from "../../hooks/useLocalStorage";
+
 
 function QuotationList({ list }) {
 
-    const [newList, setNewList] = useState([]);
+    const [newList, setNewList] = useLocalStorage("QuotationList", []);
 
     const searchByName = (e) => {
         if (e.target.value.length > 0) {
@@ -28,7 +30,7 @@ function QuotationList({ list }) {
 
     useEffect(() => {
         setNewList(list);
-    }, [list]);
+    }, [list, setNewList]);
 
     return (
         <div>
