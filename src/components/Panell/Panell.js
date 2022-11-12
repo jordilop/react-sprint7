@@ -1,13 +1,12 @@
 import { StyledPanell } from "./Panell.styled";
 import { useEffect } from "react";
 import CustomButton from "../CustomButton/CustomButton";
-import { useLocalStorage } from "../../hooks/useLocalStorage";
 import Popup from "../Popup/Popup";
 
 function Panell(props) {
 
-    const [pages, setPages] = useLocalStorage("Pages", 0);
-    const [langs, setLangs] = useLocalStorage("Langs", 0);
+    const [pages, setPages] = props.statePages;
+    const [langs, setLangs] = props.stateLangs;
     const [setExtra] = props.stateProps;
     const textPages = "Servei per triar el nombre de págines de la seva pàgina Web";
     const textLangs = "Servei per triar el nombre d'idiomes de la seva pàgina Web";

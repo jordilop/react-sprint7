@@ -3,7 +3,9 @@ import { Link } from "react-router-dom";
 import { useLocalStorage } from "../../hooks/useLocalStorage";
 import Panell from "../Panell/Panell";
 import QuotationList from "../QuotationList/QuotationList";
-import "./styles.css"
+import "./styles.css";
+
+import { useSearchParams } from "react-router-dom";
 
 function Quotation() {
 
@@ -13,6 +15,9 @@ function Quotation() {
     const [extra, setExtra] = useLocalStorage("Extra", 0);
     const [quotation, setQuotation] = useLocalStorage("Total", 0);
     const [quotationList, setQuotationList] = useLocalStorage("QuotationList", []);
+    const [searchParams, setSearchParams] = useSearchParams();
+    const [pages, setPages] = useLocalStorage("Pages", 0);
+    const [langs, setLangs] = useLocalStorage("Langs", 0);
 
     const getServicesName = (web, seo, ads) => {
         const result = [];
@@ -45,6 +50,25 @@ function Quotation() {
         setQuotation(web + seo + ads + extra);
     }, [web, seo, ads, extra, setExtra, setQuotation]);
 
+    useEffect(() => {
+        setWeb(searchParams.get("web") === "true" ? 500 : 0);
+        setSeo(searchParams.get("seo") === "true" ? 300 : 0);
+        setAds(searchParams.get("ads") === "true" ? 200 : 0);
+        setPages(Number(searchParams.get("pages")));
+        setLangs(Number(searchParams.get("langs")));
+    }, []);
+
+    useEffect(() => {
+        setSearchParams(
+            {
+                "web": Boolean(web),
+                "seo": Boolean(seo),
+                "ads": Boolean(ads),
+                "pages": pages,
+                "langs": langs
+            });
+    }, [web, seo, ads, pages, langs]);
+
     return (
         <div>
             <div className="row">
@@ -54,7 +78,7 @@ function Quotation() {
                         <input type="checkbox" name="web" value="500" checked={Boolean(web)} onChange={event => setWeb(event.target.checked ? Number(event.target.value) : 0)} />
                         Una página Web (500€)
                     </p>
-                    {web !== 0 && <Panell stateProps={[setExtra]} />}
+                    {web !== 0 && <Panell stateProps={[setExtra]} statePages={[pages, setPages]} stateLangs={[langs, setLangs]} />}
                     <p>
                         <input type="checkbox" name="seo" value="300" checked={Boolean(seo)} onChange={event => setSeo(event.target.checked ? Number(event.target.value) : 0)} />
                         Una consultoria SEO (300€)
