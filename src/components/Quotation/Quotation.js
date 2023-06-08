@@ -104,7 +104,7 @@ function Quotation() {
             </div>
             <div className="row">
                 <button>
-                    <Link to="/">Tornar a inici</Link>
+                    <Link to={process.env.PUBLIC_URL}>Tornar a inici</Link>
                 </button>
             </div>
         </div>

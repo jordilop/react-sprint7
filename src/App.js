@@ -12,18 +12,20 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="*" element=
-          {
-            <div>
-              <p>Error! Pàgina no trobada!</p>
-              <button>
-                <Link to="/">Tornar a inici</Link>
-              </button>
-            </div>
-          }
-        />
-        <Route path="/quotation" element={<Quotation />} />
-        <Route path="/" element={<Welcome />} />
+        <Route path={process.env.PUBLIC_URL}>
+          <Route path="*" element=
+            {
+              <div>
+                <p>Error! Pàgina no trobada!</p>
+                <button>
+                  <Link to="">Tornar a inici</Link>
+                </button>
+              </div>
+            }
+          />
+          <Route path="quotation" element={<Quotation />} />
+          <Route path="" element={<Welcome />} />
+        </Route>
       </Routes>
     </Router>
   );
